@@ -102,6 +102,9 @@ $(document).ready(function() {
                 console.log('距離內的藥局', markersInDistance)
                 let str = ''
                 let group = document.querySelector('.group')
+                markersInDistance.sort(function(a, b) {
+                    return a.distance - b.distance
+                })
                 markersInDistance.forEach(item => {
                     str += `
             <li class="groupLi">
@@ -127,7 +130,6 @@ $(document).ready(function() {
                     <span class="groupLi_title">
                             <h3>${item.properties.name}</h3>
                             <small>${item.distance}km</small>
-                            <p>即將休息</p>
                         </span>
                     <span class="groupLi_address">
                             <span>

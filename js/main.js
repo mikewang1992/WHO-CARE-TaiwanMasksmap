@@ -71,6 +71,7 @@ $(document).ready(function() {
             popupAnchor: [1, -34],
             shadowSize: [41, 41]
         });
+        var data
 
         function getmaskJSON() {
             var markers = new L.MarkerClusterGroup().addTo(map);
@@ -79,7 +80,7 @@ $(document).ready(function() {
             xhr.send();
             xhr.onload = function() {
                 //地圖所有點加至markers層
-                var data = JSON.parse(xhr.responseText).features
+                data = JSON.parse(xhr.responseText).features
                 console.log(data)
                 for (let i = 0; data.length > i; i++) {
                     var mask;
@@ -169,7 +170,34 @@ $(document).ready(function() {
                 }
 
             )
-            //資訊圖片
+            //監聽搜尋
+        $('.location_input').keyup(function() {
+            console.log(data)
+            if ($('.location_input').val() == '') {
+                $('.location_input_overlay').html('')
+                return
+            }
+            var results = [];
+            var toSearch = $('.location_input').val();
+            for (var i = 0; i < markersInDistance.length; i++) {
+                if (markersInDistance[i].properties['name'].indexOf(toSearch) != -1) {
+                    results.push(markersInDistance[i]);
+                }
+
+            }
+            console.log(results)
+            let str = ''
+            results.forEach(function(item) {
+                str += `<li class="location_input_overlayli">${item.properties.name}</li>`
+                console.log(str)
+            })
+            $('.location_input_overlay').html(str)
+                // $('.location_input_overlay').on("click", function(e) { if (e.target.className !== 'location_input_overlayli') { return } else { console.log(e.target) } })
+                // $('.location_input_overlay').on("click", function(e) { console.log(e.target) })
+        });
+
+
+        //資訊圖片
         $('.overlay').hide()
         $('.info_top').children('img').click(function() {
             $('.overlay').show()

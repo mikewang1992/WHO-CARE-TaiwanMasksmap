@@ -79,6 +79,27 @@ body {
     background-color: white;
 }
 
+.location_input_overlay {
+    top: 50px;
+    position: fixed;
+    width: 35%;
+    margin: 60px 10px;
+    background: white;
+    border: 1px #34495E33 solid;
+    border-radius: 5px;
+}
+
+.location_input_overlayli {
+    cursor: pointer;
+    color: #566778;
+    padding: 10px;
+}
+
+.location_input_overlayli:hover {
+    color: white;
+    background-color: #566778;
+}
+
 .location_btn {
     width: 5%;
     height: 100%;

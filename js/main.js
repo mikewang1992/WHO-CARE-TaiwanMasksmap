@@ -136,7 +136,7 @@ $(document).ready(function() {
                                 <h3>地址</h3>
                                 <p>${item.properties.address}</p>
                             </span>
-                    <a href="#">於地圖查看</a>
+                    <a class="mapMove" href="#" data-lat='${item.geometry.coordinates[1]}' data-long='${item.geometry.coordinates[0]}'>於地圖查看</a>
                     </span>
                     <span class="groupLi_phone">
                             <span>
@@ -177,46 +177,46 @@ $(document).ready(function() {
         $('.overlay').click(function() { $('.overlay').hide() })
             //監聽目前位置按鈕
         $(".location_btn").on('click', function() {
-                alert('yolo')
+                map.flyTo(userCenter, 18)
             })
             //重整列表按鈕
         $(".refresh").on('click', function() {
-            markersInDistance = []
-            markers = null
-            markers = new L.MarkerClusterGroup().addTo(map);
-            var xhr = new XMLHttpRequest();
-            xhr.open("get", "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json");
-            xhr.send();
-            xhr.onload = function() {
-                //地圖所有點加至markers層
-                var data = JSON.parse(xhr.responseText).features
-                console.log(data)
-                for (let i = 0; data.length > i; i++) {
-                    var mask;
-                    if (data[i].properties.mask_adult > 50) {
-                        mask = greenIcon;
-                    } else if (data[i].properties.mask_adult > 0) {
-                        mask = orangeIcon
-                    } else {
-                        mask = greyIcon;
+                markersInDistance = []
+                markers = null
+                markers = new L.MarkerClusterGroup().addTo(map);
+                var xhr = new XMLHttpRequest();
+                xhr.open("get", "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json");
+                xhr.send();
+                xhr.onload = function() {
+                    //地圖所有點加至markers層
+                    var data = JSON.parse(xhr.responseText).features
+                    console.log(data)
+                    for (let i = 0; data.length > i; i++) {
+                        var mask;
+                        if (data[i].properties.mask_adult > 50) {
+                            mask = greenIcon;
+                        } else if (data[i].properties.mask_adult > 0) {
+                            mask = orangeIcon
+                        } else {
+                            mask = greyIcon;
+                        }
+                        markers.addLayer(L.marker([data[i].geometry.coordinates[1], data[i].geometry.coordinates[0]], { icon: mask }).bindPopup(`<h2>${data[i].properties.name}</h2><p>成人口罩數量:${data[i].properties.mask_adult}</p><p>兒童口罩數量:${data[i].properties.mask_child}</p><p>地址:${data[i].properties.address}</p><p>電話:${data[i].properties.phone}</p>`));
+                        if (geoDistance(userCenter[0], userCenter[1], data[i].geometry.coordinates[1], data[i].geometry.coordinates[0]) < 1) {
+                            data[i].distance = geoDistance(userCenter[0], userCenter[1], data[i].geometry.coordinates[1], data[i].geometry.coordinates[0]).toFixed(2)
+                            markersInDistance.push(data[i])
+                        }
                     }
-                    markers.addLayer(L.marker([data[i].geometry.coordinates[1], data[i].geometry.coordinates[0]], { icon: mask }).bindPopup(`<h2>${data[i].properties.name}</h2><p>成人口罩數量:${data[i].properties.mask_adult}</p><p>兒童口罩數量:${data[i].properties.mask_child}</p><p>地址:${data[i].properties.address}</p><p>電話:${data[i].properties.phone}</p>`));
-                    if (geoDistance(userCenter[0], userCenter[1], data[i].geometry.coordinates[1], data[i].geometry.coordinates[0]) < 1) {
-                        data[i].distance = geoDistance(userCenter[0], userCenter[1], data[i].geometry.coordinates[1], data[i].geometry.coordinates[0]).toFixed(2)
-                        markersInDistance.push(data[i])
-                    }
-                }
-                map.addLayer(L.marker(userCenter, { icon: redIcon }).bindPopup('<h2>你的位置</h2>'))
-                map.addLayer(markers);
-                //距離內藥局渲染
-                console.log('距離內的藥局', markersInDistance)
-                let str = ''
-                let group = document.querySelector('.group')
-                markersInDistance.sort(function(a, b) {
-                    return a.distance - b.distance
-                })
-                markersInDistance.forEach(item => {
-                    str += `
+                    map.addLayer(L.marker(userCenter, { icon: redIcon }).bindPopup('<h2>你的位置</h2>'))
+                    map.addLayer(markers);
+                    //距離內藥局渲染
+                    console.log('距離內的藥局', markersInDistance)
+                    let str = ''
+                    let group = document.querySelector('.group')
+                    markersInDistance.sort(function(a, b) {
+                        return a.distance - b.distance
+                    })
+                    markersInDistance.forEach(item => {
+                        str += `
             <li class="groupLi">
                 <div class="quantities">
                     <div class="quantities_content ${item.properties.mask_adult!==0?(item.properties.mask_adult>50 ?'quantities_full':'quantities_few'):'quantities_none'}">
@@ -257,12 +257,19 @@ $(document).ready(function() {
                     </span>
                 </div>
             </li>`
-                });
-                group.innerHTML = str
-                    //資料更新時間
-                $('.updateTime').text('資訊更新時間 ' +
-                    data[0].properties.updated)
+                    });
+                    group.innerHTML = str
+                        //資料更新時間
+                    $('.updateTime').text('資訊更新時間 ' +
+                        data[0].properties.updated)
+                }
+            })
+            //移至地圖位置按鈕
+        $(".group").on('click', function(e) {
+            if (e.target.className !== 'mapMove') {
+                return
             }
+            map.flyTo([e.target.dataset.lat, e.target.dataset.long], 18)
         })
     }
 })

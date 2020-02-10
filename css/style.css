@@ -115,6 +115,10 @@ body {
     margin-right: 8px;
 }
 
+.info_top img {
+    cursor: pointer;
+}
+
 .info_bot {
     display: flex;
     justify-content: space-between;
@@ -130,6 +134,7 @@ body {
 }
 
 .info_bot button {
+    cursor: pointer;
     color: #34495E;
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 14px;

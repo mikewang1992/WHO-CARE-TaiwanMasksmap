@@ -177,7 +177,7 @@ $(document).ready(function() {
         $('.overlay').click(function() { $('.overlay').hide() })
             //監聽目前位置按鈕
         $(".location_btn").on('click', function() {
-                map.flyTo(userCenter, 18)
+                map.flyTo(userCenter, 16)
             })
             //重整列表按鈕
         $(".refresh").on('click', function() {
@@ -246,7 +246,7 @@ $(document).ready(function() {
                                 <h3>地址</h3>
                                 <p>${item.properties.address}</p>
                             </span>
-                    <a href="#">於地圖查看</a>
+                            <a class="mapMove" href="#" data-lat='${item.geometry.coordinates[1]}' data-long='${item.geometry.coordinates[0]}'>於地圖查看</a>
                     </span>
                     <span class="groupLi_phone">
                             <span>

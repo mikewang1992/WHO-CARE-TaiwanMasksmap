@@ -12,9 +12,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css"></link>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css"></link>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 
 <body>
+    <div class="overlay">
+        <div class="overlay_img"></div>
+    </div>
     <div class="wrapper">
         <div class="sidebar">
             <div class="topbar">
@@ -22,7 +26,7 @@
                 <div class="topbar_right"><img src="/img/ic_toggler@2x.png" alt="漢堡"></div>
             </div>
             <div class="location">
-                <input class="location_input" type="text" placeholder="位置">
+                <input class="location_input" type="text" placeholder="搜尋藥局">
                 <a class="location_btn" href="#"><img src="/img/ic_location@2x.png" alt="位置"></a>
             </div>
             <div class="info">
@@ -33,8 +37,8 @@
                 </div>
                 <div class="info_bot">
                     <div>
-                        <div>距離方圓 5公里 以內的供應商</div>
-                        <div>資訊更新時間 20:22:22</div>
+                        <div class="range">距離方圓 1公里 以內的供應商</div>
+                        <div class="updateTime">資訊更新時間 20:22:22</div>
                     </div>
                     <button class="refresh">重整列表</button>
                 </div>
@@ -170,12 +174,12 @@
             </div>
         </div>
         <div id="map"></div>
-    </div>
+
     </div>
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
-
-    <script src="js/main.js"></script> -->
+    </script>
+    <script src="js/main.js"></script>
     <!-- google map -->
     <!-- <script>
         var map;

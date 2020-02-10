@@ -4,12 +4,30 @@
 
 body {
     font-family: 'Noto Sans TC', sans-serif;
-    overflow: hidden;
+}
+
+.overlay {
+    position: absolute;
+    z-index: 5;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(0, 0, 0, 0.7)
+}
+
+.overlay_img {
+    height: 100vh;
+    width: 100vw;
+    background-image: url(/img/rule.png);
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .wrapper {
+    position: absolute;
+    z-index: 1;
     display: flex;
     width: 100%;
+    overflow: hidden;
     /* max-width: 1920px; */
 }
 
@@ -24,7 +42,8 @@ body {
 }
 
 .topbar {
-    padding: 20px;
+    padding: 12px 20px;
+    ;
     display: flex;
     justify-content: space-between;
     background-color: white
@@ -80,7 +99,8 @@ body {
 .info_top {
     display: flex;
     align-items: flex-end;
-    margin: 20px;
+    margin: 12px 20px;
+    ;
 }
 
 .info_top h2 {
@@ -170,7 +190,7 @@ body {
 }
 
 .group {
-    height: 66vh;
+    height: 72vh;
     overflow: auto;
 }
 
@@ -183,8 +203,8 @@ body {
 }
 
 .groupLi_title {
-    margin-top: 30px;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 12px;
 }
 
 .groupLi_title h3 {
@@ -238,21 +258,25 @@ body {
     font-size: 14px;
 }
 
+.groupLi_address p {
+    width: 200px;
+}
+
 .sidebarFooter {
     background-color: #34495E;
-    padding: 16px 24px;
+    padding: 8px 24px;
 }
 
 .sidebarFooter_phone {
     color: white;
     font-size: 16px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 .sidebarFooter_Engineer {
     color: #566778;
     font-size: 12px;
-    padding-bottom: 16px;
+    padding-bottom: 8px;
 }
 
 #map {

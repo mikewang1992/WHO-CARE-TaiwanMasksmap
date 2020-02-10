@@ -114,7 +114,7 @@ $(document).ready(function() {
                         <div class="quantities_numbers">
                             <div>
                                 <h3>${item.properties.mask_adult}</h3><span>片</span></div>
-                            <img class="quantities_stockpic" src="/img/ic_stock_${item.properties.mask_adult!==0?(item.properties.mask_adult>50 ?'full':'few'):'none'}@2x.png" alt="">
+                            <img class="quantities_stockpic" src="img/ic_stock_${item.properties.mask_adult!==0?(item.properties.mask_adult>50 ?'full':'few'):'none'}@2x.png" alt="">
                         </div>
                     </div>
                     <div class="quantities_content ${item.properties.mask_child!==0?(item.properties.mask_child>50 ?'quantities_full':'quantities_few'):'quantities_none'} ">
@@ -122,7 +122,7 @@ $(document).ready(function() {
                         <div class="quantities_numbers">
                             <div>
                                 <h3>${item.properties.mask_child}</h3><span>片</span></div>
-                            <img class="quantities_stockpic" src="/img/ic_stock_${item.properties.mask_child!==0?(item.properties.mask_child>50 ?'full':'few'):'none'}@2x.png" alt="">
+                            <img class="quantities_stockpic" src="img/ic_stock_${item.properties.mask_child!==0?(item.properties.mask_child>50 ?'full':'few'):'none'}@2x.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -224,7 +224,7 @@ $(document).ready(function() {
                         <div class="quantities_numbers">
                             <div>
                                 <h3>${item.properties.mask_adult}</h3><span>片</span></div>
-                            <img class="quantities_stockpic" src="/img/ic_stock_${item.properties.mask_adult!==0?(item.properties.mask_adult>50 ?'full':'few'):'none'}@2x.png" alt="">
+                            <img class="quantities_stockpic" src="img/ic_stock_${item.properties.mask_adult!==0?(item.properties.mask_adult>50 ?'full':'few'):'none'}@2x.png" alt="">
                         </div>
                     </div>
                     <div class="quantities_content ${item.properties.mask_child!==0?(item.properties.mask_child>50 ?'quantities_full':'quantities_few'):'quantities_none'} ">
@@ -232,7 +232,7 @@ $(document).ready(function() {
                         <div class="quantities_numbers">
                             <div>
                                 <h3>${item.properties.mask_child}</h3><span>片</span></div>
-                            <img class="quantities_stockpic" src="/img/ic_stock_${item.properties.mask_child!==0?(item.properties.mask_child>50 ?'full':'few'):'none'}@2x.png" alt="">
+                            <img class="quantities_stockpic" src="img/ic_stock_${item.properties.mask_child!==0?(item.properties.mask_child>50 ?'full':'few'):'none'}@2x.png" alt="">
                         </div>
                     </div>
                 </div>

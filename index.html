@@ -28,7 +28,7 @@
             </div>
             <div class="sidebar">
                 <div class="location">
-                    <input class="location_input" type="text" placeholder="搜尋藥局">
+                    <input class="location_input" type="text" placeholder="搜尋距離內藥局">
                     <ul class="location_input_overlay">
                         <li class="location_input_overlayli">123</li>
                         <li class="location_input_overlayli">123</li>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="info_bot">
                         <div>
-                            <div class="range">距離你方圓 1公里 以內的供應商</div>
+                            <div class="range">距離你方圓 <input class="rangeSelect" type="number" min="1" max="10" value="1" style="width: 3em">公里 以內的供應商</div>
                             <div class="updateTime">資訊更新時間 20:22:22</div>
                         </div>
                         <button class="refresh">重整列表</button>

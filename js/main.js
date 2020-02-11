@@ -350,7 +350,12 @@ $(document).ready(function() {
             })
             //重整列表按鈕
         $(".refresh").on('click', function() {
-            refreshWithRange(3)
+            $(".rangeSelect").val('1')
+            refreshWithRange(1)
+        })
+        $(".rangeSelect").on('change', function() {
+            if ($(".rangeSelect").val() == '') { $(".rangeSelect").val() = 1 }
+            refreshWithRange($(".rangeSelect").val())
         })
 
         function refreshWithRange(range) {

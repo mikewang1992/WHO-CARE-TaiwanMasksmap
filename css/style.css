@@ -6,6 +6,11 @@ body {
     font-family: 'Noto Sans TC', sans-serif;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    opacity: 1;
+}
+
 .overlay {
     position: absolute;
     z-index: 5;

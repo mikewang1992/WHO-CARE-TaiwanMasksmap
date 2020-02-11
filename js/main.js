@@ -83,6 +83,7 @@ $(document).ready(function() {
                 data = JSON.parse(xhr.responseText).features
                 console.log(data)
                 for (let i = 0; data.length > i; i++) {
+                    console.log(i++, data[i].geometry.coordinates[1])
                     var mask;
                     if (data[i].properties.mask_adult > 50) {
                         mask = greenIcon;
@@ -361,6 +362,7 @@ $(document).ready(function() {
                     //地圖所有點加至markers層
                     var data = JSON.parse(xhr.responseText).features
                     console.log(data)
+                    console.log(data[0].geometry)
                     for (let i = 0; data.length > i; i++) {
                         var mask;
                         if (data[i].properties.mask_adult > 50) {
@@ -439,7 +441,9 @@ $(document).ready(function() {
             if (e.target.className !== 'mapMove') {
                 return
             }
-            $('.sidebar').slideToggle('slow')
+            if (window.matchMedia("(max-width: 414px)").matches) {
+                $('.sidebar').slideToggle('slow')
+            }
             map.flyTo([e.target.dataset.lat, e.target.dataset.long], 18)
         })
         $(".burger").click(function() {

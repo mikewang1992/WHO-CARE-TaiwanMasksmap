@@ -286,13 +286,12 @@ $(document).ready(function() {
         </li>`
             });
             group.innerHTML = str2
-                // $('.location_input_overlay').on("click", function(e) { console.log(e.target) })
         });
+
         $('.location_input_overlay').on("click", function(e) {
             if (e.target.className !== 'location_input_overlayli') {
                 return
             } else {
-                // console.log(e.target.dataset.name, e.target.dataset.address, e.target.dataset.phone, e.target.dataset.mask_adult, e.target.dataset.mask_child, e.target.dataset.lat, e.target.dataset.long)
                 $('.location_input_overlay').hide()
                 $('.location_input_overlay').html('')
                 let group = document.querySelector('.group')
@@ -440,7 +439,11 @@ $(document).ready(function() {
             if (e.target.className !== 'mapMove') {
                 return
             }
+            $('.sidebar').slideToggle('slow')
             map.flyTo([e.target.dataset.lat, e.target.dataset.long], 18)
+        })
+        $(".burger").click(function() {
+            $(".sidebar").slideToggle('fast')
         })
     }
 })

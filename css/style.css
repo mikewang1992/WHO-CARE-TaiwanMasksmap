@@ -28,7 +28,7 @@ body {
     display: flex;
     width: 100%;
     overflow: hidden;
-    /* max-width: 1920px; */
+    height: 100vh;
 }
 
 .sidebar {
@@ -385,5 +385,17 @@ body {
     }
     .topbar_right {
         display: block;
+    }
+    .groupLi_address p {
+        width: 180px;
+    }
+    .overlay {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .overlay_img {
+        background-size: cover;
+        height: 80vh;
     }
 }

@@ -80,13 +80,16 @@ body {
 }
 
 .location_input_overlay {
+    display: none;
     top: 50px;
     position: fixed;
-    width: 35%;
-    margin: 60px 10px;
-    background: white;
+    width: 20%;
+    margin: 60px 5px;
+    background: rgb(255, 255, 255, 0.95);
     border: 1px #34495E33 solid;
     border-radius: 5px;
+    overflow: auto;
+    max-height: 30%;
 }
 
 .location_input_overlayli {

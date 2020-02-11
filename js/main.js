@@ -174,7 +174,54 @@ $(document).ready(function() {
         $('.location_input').keyup(function() {
             console.log(data)
             if ($('.location_input').val() == '') {
+                $('.location_input_overlay').hide()
                 $('.location_input_overlay').html('')
+                let group = document.querySelector('.group')
+                let str2 = ''
+                markersInDistance.forEach(item => {
+                    str2 += `
+        <li class="groupLi">
+            <div class="quantities">
+                <div class="quantities_content ${item.properties.mask_adult!==0?(item.properties.mask_adult>50 ?'quantities_full':'quantities_few'):'quantities_none'}">
+                    <h3 class="quantities_title">成人口罩數量</h3>
+                    <div class="quantities_numbers">
+                        <div>
+                            <h3>${item.properties.mask_adult}</h3><span>片</span></div>
+                        <img class="quantities_stockpic" src="img/ic_stock_${item.properties.mask_adult!==0?(item.properties.mask_adult>50 ?'full':'few'):'none'}@2x.png" alt="">
+                    </div>
+                </div>
+                <div class="quantities_content ${item.properties.mask_child!==0?(item.properties.mask_child>50 ?'quantities_full':'quantities_few'):'quantities_none'} ">
+                    <h3 class="quantities_title">兒童口罩數量</h3>
+                    <div class="quantities_numbers">
+                        <div>
+                            <h3>${item.properties.mask_child}</h3><span>片</span></div>
+                        <img class="quantities_stockpic" src="img/ic_stock_${item.properties.mask_child!==0?(item.properties.mask_child>50 ?'full':'few'):'none'}@2x.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="groupLi_content">
+                <span class="groupLi_title">
+                        <h3>${item.properties.name}</h3>
+                        <small>${item.distance}km</small>
+                    </span>
+                <span class="groupLi_address">
+                        <span>
+                            <h3>地址</h3>
+                            <p>${item.properties.address}</p>
+                        </span>
+                <a class="mapMove" href="#" data-lat='${item.geometry.coordinates[1]}' data-long='${item.geometry.coordinates[0]}'>於地圖查看</a>
+                </span>
+                <span class="groupLi_phone">
+                        <span>
+                            <h3>電話</h3>
+                            <p>${item.properties.phone}</p>
+                        </span>
+                <a href="tel:${item.properties.phone}">撥打電話</a>
+                </span>
+            </div>
+        </li>`
+                });
+                group.innerHTML = str2
                 return
             }
             var results = [];
@@ -186,16 +233,112 @@ $(document).ready(function() {
 
             }
             console.log(results)
+            $('.location_input_overlay').show()
             let str = ''
             results.forEach(function(item) {
-                str += `<li class="location_input_overlayli">${item.properties.name}</li>`
+                str += `<li class="location_input_overlayli" data-name="${item.properties.name}" data-address="${item.properties.address}" data-phone="${item.properties.phone}" data-mask_adult="${item.properties.mask_adult}" data-mask_child="${item.properties.mask_child}" data-distance="${item.distance}" data-lat="${item.geometry.coordinates[1]}" data-long="${item.geometry.coordinates[0]}">${item.properties.name}</li>`
                 console.log(str)
             })
             $('.location_input_overlay').html(str)
-                // $('.location_input_overlay').on("click", function(e) { if (e.target.className !== 'location_input_overlayli') { return } else { console.log(e.target) } })
+            let group = document.querySelector('.group')
+            let str2 = ''
+            results.forEach(item => {
+                str2 += `
+        <li class="groupLi">
+            <div class="quantities">
+                <div class="quantities_content ${item.properties.mask_adult!==0?(item.properties.mask_adult>50 ?'quantities_full':'quantities_few'):'quantities_none'}">
+                    <h3 class="quantities_title">成人口罩數量</h3>
+                    <div class="quantities_numbers">
+                        <div>
+                            <h3>${item.properties.mask_adult}</h3><span>片</span></div>
+                        <img class="quantities_stockpic" src="img/ic_stock_${item.properties.mask_adult!==0?(item.properties.mask_adult>50 ?'full':'few'):'none'}@2x.png" alt="">
+                    </div>
+                </div>
+                <div class="quantities_content ${item.properties.mask_child!==0?(item.properties.mask_child>50 ?'quantities_full':'quantities_few'):'quantities_none'} ">
+                    <h3 class="quantities_title">兒童口罩數量</h3>
+                    <div class="quantities_numbers">
+                        <div>
+                            <h3>${item.properties.mask_child}</h3><span>片</span></div>
+                        <img class="quantities_stockpic" src="img/ic_stock_${item.properties.mask_child!==0?(item.properties.mask_child>50 ?'full':'few'):'none'}@2x.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="groupLi_content">
+                <span class="groupLi_title">
+                        <h3>${item.properties.name}</h3>
+                        <small>${item.distance}km</small>
+                    </span>
+                <span class="groupLi_address">
+                        <span>
+                            <h3>地址</h3>
+                            <p>${item.properties.address}</p>
+                        </span>
+                <a class="mapMove" href="#" data-lat='${item.geometry.coordinates[1]}' data-long='${item.geometry.coordinates[0]}'>於地圖查看</a>
+                </span>
+                <span class="groupLi_phone">
+                        <span>
+                            <h3>電話</h3>
+                            <p>${item.properties.phone}</p>
+                        </span>
+                <a href="tel:${item.properties.phone}">撥打電話</a>
+                </span>
+            </div>
+        </li>`
+            });
+            group.innerHTML = str2
                 // $('.location_input_overlay').on("click", function(e) { console.log(e.target) })
         });
-
+        $('.location_input_overlay').on("click", function(e) {
+            if (e.target.className !== 'location_input_overlayli') {
+                return
+            } else {
+                // console.log(e.target.dataset.name, e.target.dataset.address, e.target.dataset.phone, e.target.dataset.mask_adult, e.target.dataset.mask_child, e.target.dataset.lat, e.target.dataset.long)
+                $('.location_input_overlay').hide()
+                $('.location_input_overlay').html('')
+                let group = document.querySelector('.group')
+                group.innerHTML =
+                    `<li class="groupLi">
+                <div class="quantities">
+                    <div class="quantities_content ${e.target.dataset.mask_adult!==0?(e.target.dataset.mask_adult>50 ?'quantities_full':'quantities_few'):'quantities_none'}">
+                        <h3 class="quantities_title">成人口罩數量</h3>
+                        <div class="quantities_numbers">
+                            <div>
+                                <h3>${e.target.dataset.mask_adult}</h3><span>片</span></div>
+                            <img class="quantities_stockpic" src="img/ic_stock_${e.target.dataset.mask_adult!==0?(e.target.dataset.mask_adult>50 ?'full':'few'):'none'}@2x.png" alt="">
+                        </div>
+                    </div>
+                    <div class="quantities_content ${e.target.dataset.mask_child!==0?(e.target.dataset.mask_child>50 ?'quantities_full':'quantities_few'):'quantities_none'} ">
+                        <h3 class="quantities_title">兒童口罩數量</h3>
+                        <div class="quantities_numbers">
+                            <div>
+                                <h3>${e.target.dataset.mask_child}</h3><span>片</span></div>
+                            <img class="quantities_stockpic" src="img/ic_stock_${e.target.dataset.mask_child!==0?(e.target.dataset.mask_child>50 ?'full':'few'):'none'}@2x.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="groupLi_content">
+                    <span class="groupLi_title">
+                            <h3>${e.target.dataset.name}</h3>
+                            <small>${e.target.dataset.distance}km</small>
+                        </span>
+                    <span class="groupLi_address">
+                            <span>
+                                <h3>地址</h3>
+                                <p>${e.target.dataset.address}</p>
+                            </span>
+                    <a class="mapMove" href="#" data-lat='${e.target.dataset.lat}' data-long='${ e.target.dataset.long}'>於地圖查看</a>
+                    </span>
+                    <span class="groupLi_phone">
+                            <span>
+                                <h3>電話</h3>
+                                <p>${e.target.dataset.phone}</p>
+                            </span>
+                    <a href="tel:${e.target.dataset.phone}">撥打電話</a>
+                    </span>
+                </div>
+            </li>`
+            }
+        })
 
         //資訊圖片
         $('.overlay').hide()

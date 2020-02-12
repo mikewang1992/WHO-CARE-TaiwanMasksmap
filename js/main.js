@@ -74,6 +74,7 @@ $(document).ready(function() {
         var data
 
         function getmaskJSON() {
+            $("body").loading()
             var markers = new L.MarkerClusterGroup().addTo(map);
             var xhr = new XMLHttpRequest();
             xhr.open("get", "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json");
@@ -153,6 +154,7 @@ $(document).ready(function() {
                     //資料更新時間
                 $('.updateTime').text('資訊更新時間 ' +
                     data[0].properties.updated)
+                $("body").loading('stop')
             }
         }
         getmaskJSON()
@@ -359,6 +361,7 @@ $(document).ready(function() {
         })
 
         function refreshWithRange(range) {
+            $("body").loading()
             markersInDistance = []
             markers = null
             markers = new L.MarkerClusterGroup().addTo(map);
@@ -440,6 +443,7 @@ $(document).ready(function() {
                     //資料更新時間
                 $('.updateTime').text('資訊更新時間 ' +
                     data[0].properties.updated)
+                $("body").loading('stop')
             }
         }
         //移至地圖位置按鈕

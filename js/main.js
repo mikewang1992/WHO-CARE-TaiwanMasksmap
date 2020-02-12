@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    setTimeout(() => {
+        $('.overlay').hide()
+    }, 3000);
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             let userCenter = []
@@ -8,7 +11,7 @@ $(document).ready(function() {
             console.log(userCenter)
             main(userCenter)
         }, function geo_error() {
-            alert('獲取位置失敗,那就看作者家附近吧')
+            alert('獲取位置失敗,請開啟手機GPS、重啟頁面')
             main([22.636996999999997, 120.3550695])
 
         }, {
@@ -16,7 +19,7 @@ $(document).ready(function() {
             timeout: 5000
         });
     } else {
-        alert('獲取位置失敗,那就看作者家附近吧')
+        alert('獲取位置失敗,請開啟手機GPS、重啟頁面')
         main([22.636996999999997, 120.3550695])
     }
 
@@ -349,11 +352,10 @@ $(document).ready(function() {
         })
 
         //資訊圖片
-        $('.overlay').hide()
         $('.info_top').children('img').click(function() {
-            $('.overlay').show()
+            $('.overlay').toggle()
         })
-        $('.overlay').click(function() { $('.overlay').hide() })
+        $('.overlay').click(function() { $('.overlay').toggle() })
             //監聽目前位置按鈕
         $(".location_btn").on('click', function() {
                 map.flyTo(userCenter, 16)

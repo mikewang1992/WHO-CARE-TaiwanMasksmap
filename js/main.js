@@ -1,16 +1,24 @@
 $(document).ready(function() {
-    navigator.geolocation.getCurrentPosition(function(position) {
-        let userCenter = []
-        userCenter.push(position.coords.latitude)
-        userCenter.push(position.coords.longitude)
-        console.log(position, position.coords.latitude, position.coords.longitude)
-        console.log(userCenter)
-        main(userCenter)
-    }, function geo_error() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            let userCenter = []
+            userCenter.push(position.coords.latitude)
+            userCenter.push(position.coords.longitude)
+            console.log(position, position.coords.latitude, position.coords.longitude)
+            console.log(userCenter)
+            main(userCenter)
+        }, function geo_error() {
+            alert('獲取位置失敗,那就看作者家附近吧')
+            main([22.636996999999997, 120.3550695])
+
+        }, {
+            enableHighAccuracy: true,
+            timeout: 5000
+        });
+    } else {
         alert('獲取位置失敗,那就看作者家附近吧')
-        let userCenter = [22.602625, 120.305627]
-        main(userCenter)
-    });
+        main([22.636996999999997, 120.3550695])
+    }
 
     function main(userCenter) {
         let markersInDistance = []
